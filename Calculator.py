@@ -42,7 +42,12 @@ def format_number(number):
     if number < 0.0001:
         return f"{number:.2e}"  # Format as scientific notation
     else:
-        return f"{number:.5f}"  # Format with five decimal places
+        # Check if the number is effectively an integer
+        if number == int(number):
+            return str(int(number))  # Return as an integer string
+        else:
+            # Format with up to five decimal places, removing trailing zeros
+            return f"{number:.5f}".rstrip('0').rstrip('.')  # Remove trailing zeros and dot if necessary
 
 def evaluate_expression(expression):
     try:
